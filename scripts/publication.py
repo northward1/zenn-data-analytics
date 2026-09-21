@@ -299,3 +299,43 @@ ax.set_yticklabels(ticks)
 plt.legend(title="Publication")
 
 common.save("like_count_box_plot_publication.webp")
+
+df, fig, ax = common.setup()
+
+df_free_pro = df[df["publication_plan"].isin(["free", "pro"])].copy()
+df_free_pro["publication_plan"] = "free+pro"
+df = pd.concat(
+    [
+        df_free_pro[df_free_pro["publication_plan"] == "free+pro"],
+        df[df["publication_plan"] == "none"],
+    ]
+)
+
+total_summary = df.pivot_table(
+    index="month",
+    columns="publication_plan",
+    values="authenticated_liked_count",
+    aggfunc="count",
+)
+
+df = df[df["authenticated_liked_count"] == 0]
+
+summary = df.pivot_table(
+    index="month",
+    columns="publication_plan",
+    values="authenticated_liked_count",
+    aggfunc="count",
+)
+
+ratio_summary = (summary / total_summary * 100).round(2).astype(str) + "%"
+ratio_summary.columns = [f"{col} 割合" for col in ratio_summary.columns]
+
+summary.columns = [f"{col}" for col in summary.columns]
+
+summary = pd.concat([summary, ratio_summary], axis=1)
+
+summary = summary.reset_index()
+summary = summary[["month", "free+pro", "free+pro 割合", "none", "none 割合"]]
+summary = summary.rename(columns={"month": "月"})
+
+print(summary.to_markdown(index=False))
