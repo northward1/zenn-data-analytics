@@ -5,8 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "bar-chart-race>=0.1.0",
     "matplotlib>=3.11.2",
     "pandas>=3.0.6",
+    "scipy>=1.18.1",
     "seaborn>=0.13.2",
     "tabulate>=0.10.0",
 ]
