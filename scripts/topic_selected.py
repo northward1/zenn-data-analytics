@@ -163,3 +163,32 @@ plt.xlabel("月")
 plt.ylabel("平均Like数")
 
 common.save("article_like_count_ai.webp")
+
+df, fig, ax = common.setup()
+
+df = df.explode("topics")
+df = df[df["topics"].isin(TOPIC_LANG)]
+
+summary = (
+    df.groupby(["month", "topics"])
+    .agg(
+        投稿数=("article_type", "count"),
+        合計Like数=("authenticated_liked_count", "sum"),
+        平均ブックマーク数=("bookmark_count", "mean"),
+    )
+    .reset_index()
+)
+
+sns.lineplot(
+    data=summary,
+    x="month",
+    y="合計Like数",
+    hue="topics",
+    marker="o",
+    ax=ax,
+)
+
+plt.xlabel("月")
+plt.ylabel("合計Like数")
+
+common.save("article_like_countsum_lang.webp")
