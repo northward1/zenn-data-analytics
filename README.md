@@ -1,6 +1,6 @@
 # zenn-data-analytics
 
-[2026年にZennに投稿された5.2万件の記事のデータ分析:アルゴリズム導入やPublicationによるLike数の変化など](https://zenn.dev/northward/articles/zenn-data-analysis-2026)で分析したデータや、記事中で貼った図や表を作成するためのスクリプトを置いています。
+[2026年にZennに投稿された5.2万件の記事のデータ分析:アルゴリズム導入やPublicationによるLike数の変化など](https://zenn.dev/northward/articles/zenn-data-analysis-2026)及び[2026年にZennに投稿された5.2万件の記事のデータ分析 Appendix](https://zenn.dev/northward/scraps/84ef69f76553c5)で分析したデータや、記事中で貼った図や表を作成するためのスクリプトを置いています。
 
 ## 環境構築・スクリプトの実行手順
 
